@@ -1,8 +1,8 @@
 import csv
 import StringIO
-from lxml import html
 
 from django.template.loader import render_to_string
+from lxml import html
 import xhtml2pdf.pisa as pisa
 
 from . import exceptions
@@ -27,7 +27,7 @@ def to_csv(product_list, template):
     rendered_template = render_to_string(template, {'product_list': product_list})
     doc = html.document_fromstring(rendered_template)
 
-    for table_row in doc.find_class('row'):
+    for table_row in doc.findall('.//tr'):
         table_row_text = [el.text_content() for el in table_row]
         writer.writerow(table_row_text)
 

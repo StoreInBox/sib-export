@@ -10,6 +10,7 @@ tests_requires = []
 install_requires = [
     'Django>=1.7,<1.9',
     'xhtml2pdf==0.0.6',
+    'lxml==3.4.4',
 ]
 
 setup(
