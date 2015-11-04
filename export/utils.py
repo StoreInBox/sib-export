@@ -21,16 +21,16 @@ def to_pdf(product_list, template):
         raise exceptions.PDFExportError('Cannot convert product list to PDF: {}'.format(pdf.err))
 
 
-def _to_string(product_list, template):
-    result = StringIO.StringIO()
+def _to_html(product_list, template):
     rendered_template = render_to_string(template, {'product_list': product_list})
-    doc = html.document_fromstring(rendered_template)
-    return [result, doc]
+
+    return html.document_fromstring(rendered_template)
 
 
 def to_csv(product_list, template):
     """ Create CSV file with product list """
-    result, doc = _to_string(product_list, template)
+    result = StringIO.StringIO()
+    doc = _to_html(product_list, template)
     writer = csv.writer(result)
 
     for row_index in doc.findall('.//tr'):
@@ -42,7 +42,8 @@ def to_csv(product_list, template):
 
 def to_xls(product_list, template):
     """ Create xls file with product list """
-    result, doc = _to_string(product_list, template)
+    result = StringIO.StringIO()
+    doc = _to_html(product_list, template)
     workbook  = xlsxwriter.Workbook(result)
     worksheet = workbook.add_worksheet()
 
