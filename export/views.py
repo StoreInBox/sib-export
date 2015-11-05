@@ -10,6 +10,7 @@ class ProductListExportView(View):
     implemented_export_formats = {
         'pdf': utils.to_pdf,
         'csv': utils.to_csv,
+        'xls': utils.to_xls,
     }
 
     def get(self, request, export_format, *args, **kwargs):
