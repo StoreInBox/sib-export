@@ -23,7 +23,6 @@ def to_pdf(product_list, template):
 
 def _to_html(product_list, template):
     rendered_template = render_to_string(template, {'product_list': product_list})
-
     return html.document_fromstring(rendered_template)
 
 
@@ -41,10 +40,10 @@ def to_csv(product_list, template):
 
 
 def to_xls(product_list, template):
-    """ Create xls file with product list """
+    """ Create XLS file with product list """
     result = StringIO.StringIO()
     doc = _to_html(product_list, template)
-    workbook  = xlsxwriter.Workbook(result)
+    workbook = xlsxwriter.Workbook(result)
     worksheet = workbook.add_worksheet()
 
     for row_index, row in enumerate(doc.findall('.//tr')):
