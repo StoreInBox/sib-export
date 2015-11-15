@@ -52,11 +52,7 @@ def to_xls(product_list, template):
 
     header_format = workbook.add_format({'bold': True})
     header_format.set_align('center')
-    column_format = workbook.add_format({'num_format': True})
-    column_format.set_align('right')
     worksheet.set_row(0, 15, header_format)
-    worksheet.set_column('B:B', 10, column_format)
-    worksheet.set_column('A:A', 20)
     workbook.close()
 
     return result.getvalue()
